@@ -5,15 +5,15 @@ const autoprefixer = require('gulp-autoprefixer');
 const imagemin = require('gulp-imagemin');
 const sass = require('gulp-sass');
 
-gulp.task('clean', () =>  Promise.resolve(del.sync('./build/**/*')));
+gulp.task('clean', () =>  Promise.resolve(del.sync('./docs/**/*')));
 
-gulp.task('browserSync', () => browserSync({server: {baseDir: './build'}, notify: false}));
+gulp.task('browserSync', () => browserSync({server: {baseDir: './docs'}, notify: false}));
 
-gulp.task('img', () => gulp.src('./app/img/**/*').pipe(imagemin()).pipe(gulp.dest('./build/img/')));
+gulp.task('img', () => gulp.src('./app/img/**/*').pipe(imagemin()).pipe(gulp.dest('./docs/img/')));
 
 gulp.task('html', () =>
     gulp.src('./app/index.html')
-        .pipe(gulp.dest('./build'))
+        .pipe(gulp.dest('./docs'))
         .pipe(browserSync.reload({stream: true}))
 );
 
@@ -21,7 +21,7 @@ gulp.task('sass', () =>
     gulp.src(['./app/style/**/*.scss'])
         .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
         .pipe(autoprefixer({browsers: ['last 2 versions'], cascade: false}))
-        .pipe(gulp.dest('./build/style'))
+        .pipe(gulp.dest('./docs/style'))
         .pipe(browserSync.reload({stream: true}))
 );
 
